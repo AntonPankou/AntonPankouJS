@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <Title>String buffer</Title>
+    </head>
+    <body>
+        <script>
+        'use strict'
+        
+	function makeBuffer(a) {
+		let str ='';
+		
+	return function(a) {
+	if (arguments.length == 0) {
+	return str;
+	}
+	
+	str += a;
+	
+	};		
+	};
+	
+	let buffer = makeBuffer();
+	buffer('Alea ');
+	buffer('jacta ');
+	buffer('est');
+	buffer('!');
+
+	console.log(buffer());
+	
+	buffer(189);
+	buffer(7823);
+	buffer(43989);
+	
+	console.log(buffer());
+
+        </script>
+    </body>
+</html>

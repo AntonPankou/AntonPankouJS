@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>My dick is very big</title>
+    </head>
+    <body>
+        <script>
+            'use strict'
+            let str = 'The Quick Brown Fox';
+
+            //toUpperCase() и charAt() 
+
+            function swapCase(str){
+                let str2 = '';
+                for (let i = 0; i < str.length; i++){
+                    if (str[i].toUpperCase() == str[i])
+                str2 = str2 + str[i].toLowerCase();
+                else str2 = str2 + str[i].toUpperCase()
+                }
+                return str2
+            }
+
+            console.log(swapCase(str));
+
+        </script>
+    </body>
+
+</html>
