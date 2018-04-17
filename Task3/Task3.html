@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<title>Objects methods</title>
+	</head>
+
+	<body>
+			<script type="text/javascript">
+			'use strict'
+			function Vehicle(engineTorque) {
+					this.engineTorque = engineTorque;
+					this.engaged = false;
+			
+			this.engage = function(){
+				this.engaged = true;
+				console.log('Wroom-wroom');			
+			}
+
+			this.disEngage = function (){
+				console.log('...');
+				this.engaged = false;
+			}
+			}
+
+			let vehicle = new Vehicle(1000);
+				vehicle.engage();
+				vehicle.disEngage();
+
+			function Car(engineTorque, cockpitSits, weight, mark, design){
+				Vehicle.apply(this,arguments);
+				
+			this.mark = mark;
+			this.design = design;
+			
+
+			this.cockpitSits = cockpitSits;
+			this.engineTorque = engineTorque;
+
+			this.getEnginePower = function(){
+				return engineTorque / weight
+			}
+			
+			this.getEngineSpeed = function (){
+				return this.getEnginePower() * 10;
+			}
+
+			this.tripTime = function(distance){			
+				if (!this.engaged) {
+				throw new Error('Engage the engine!')
+			}
+			
+			return distance / this.getEngineSpeed();
+			}
+
+			}
+			
+			let car = new Car(10000, 4, 500, 'BMW', 'default');
+
+			//vehicle.engage();
+			//vehicle.disEngage();
+			//console.log(car);
+			//console.log(car.engineTorque);
+			//console.log(car.getEnginePower());
+			//console.log(car.getEngineSpeed());
+			//car.engage();
+			//console.log(car.tripTime(1000));
+			//console.log(car);
+
+
+			function Truck (engineTorque, cockpitSits, weight, mark, design, capacity) {
+				Car.apply(this, arguments);
+				
+				this.capacity = capacity;				
+
+				this.loadDeck = 0;				
+
+				if (cockpitSits > 3) {
+					throw new Error ('Too much sits')
+				}
+
+				if (cockpitSits < 1) {
+					throw new Error ('There is no sits for driver')
+				}
+
+				if (capacity < 1000) {
+					throw new Error ('Its not enough')
+				}				
+
+				this.loading = function (piece){					
+					for (let i = 0; i < arguments.length; i++){
+						this.loadDeck += arguments[i];
+					}
+
+					if (this.loadDeck > this.capacity) {
+						throw new Error ('Overload!');
+					}
+				}
+
+				this.emptyLoadDeck = function (){
+					this.loadDeck = 0;
+				}
+			};
+
+			let truck = new Truck(20000, 2, 1500, 'Volvo', 'brutal', 3000);
+
+			//console.log(truck);
+			//truck.engage();
+			//console.log(truck.loadDeck);
+			//console.log(truck.engineTorque);
+			//console.log(truck.getEnginePower());
+			//console.log(truck.getEngineSpeed());
+			//console.log(truck.tripTime(1000));
+			//truck.loading(150, 300, 800, 600);
+			//console.log(truck.loadDeck);
+			//truck.emptyLoadDeck();
+			//console.log(truck.loadDeck);
+
+			function Bus (engineTorque, cockpitSits, weight, mark, design, passSits) {
+				Car.apply(this,arguments);
+
+				this.passSits = passSits;
+
+				this.passangers = [];
+				
+				if (cockpitSits > 3) {
+					throw new Error ('Too much sits')
+				}
+
+				if (cockpitSits < 1) {
+					throw new Error ('There is no sit for driver')
+				}
+
+				if (cockpitSits > 20) {
+					throw new Error ('This is not a damned train, boy')
+				}
+
+				if (cockpitSits < 2) {
+					throw new Error ('Place for second pilot is requared')
+				}
+
+				this.loading = function(piece){					
+					for (let i = 0; i < arguments.length; i++){
+						this.passangers.push(arguments[i]);
+					}
+
+					if (this.passangers.length > this.passSits) {
+						throw new Error ('Overload!');
+					}
+				}
+
+				this.gtfoSomeone = function(someone){
+					for(let i=0; i < this.passangers.length; i++){
+						if(this.passangers[i] == someone){
+							console.log('Have a nice day' + ' ' + this.passangers[i]);
+							this.passangers.splice(i,1);							
+						}
+					}
+				}
+
+				this.gtfoEveryone = function (){
+					this.passangers.length = 0;
+					console.log('This is the end of line')
+				}
+
+			}
+			
+			let bus = new Bus(16000, 2, 900, 'Gazel', 'soviet', 8);
+
+			//console.log(bus);
+			//bus.engage();
+			//console.log(bus.passangers);
+			//console.log(bus.engineTorque);
+			//console.log(bus.getEnginePower());
+			//console.log(bus.getEngineSpeed());
+			//console.log(bus.tripTime(3000));			
+			//bus.loading('Mark','John','Luc','Woody','Deadpool');
+			//console.log(bus.passangers);
+			//bus.loading('Lenin','Cezar','Henry V','Borhes');
+			//console.log(bus.passangers);
+			//bus.gtfoSomeone('Stalin');
+			//console.log(bus.passangers);
+			//bus.gtfoSomeone('Woody');
+			//console.log(bus.passangers);
+			//bus.gtfoEveryone();
+			//console.log(bus.passangers);
+
+			function SportCar (engineTorque, cockpitSits, weight, mark, design){
+				Car.apply(this,arguments);
+
+				if (cockpitSits > 2) {
+					throw new Error ('Too much sits')
+				}
+
+				if (cockpitSits < 1) {
+					throw new Error ('There is no sit for driver')
+				}				
+
+				this.tripTime = function(distance, boost){			
+				if (!this.engaged) {
+				throw new Error('Engage the engine!')
+				}
+
+				if (boost < 1){
+					throw new Error('To slooooooowww')
+				}
+
+				if (boost > 3){
+					throw new Error('To slooooooowww')
+				}
+
+				return distance / this.getEngineSpeed() * boost;
+			}
+			}
+
+			let sportCar = new SportCar(11000, 2, 700, 'Lada', 'stylish');
+
+			//console.log(sportCar);
+			//sportCar.engage();
+			//console.log(sportCar.tripTime(1200, 3.7));
+
+
+		</script>
+	</body>
+</html>
