@@ -1,0 +1,84 @@
+.ap-form-wrapper{
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    border: solid black 1px;
+}
+
+.ap-form-button {
+    
+}
+
+.ap-form-button__addbutton {
+    background: rgb(0,0,255);
+    padding: 5px 10px;
+    max-width: 150px;
+    margin: 20px 0 20px 20px;
+    color: white;
+    border-radius: 6px;
+}
+
+.ap-form-head-block{
+    margin: 20px 0 0 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.ap-form-head-block__title{
+    font-family: Arial, Helvetica, sans-serif
+}
+
+.ap-form-head-block__adress {
+    margin-left: 10px;
+    font-family: sans-serif;
+    background: lightgrey;
+    font-size: 12px;
+}
+
+.ap-form-statement {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+.ap-form-statement{
+    margin: 20px 0 0 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.ap-form-field-block {
+    margin: 20px 0 0 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.ap-form-select-block {
+    margin: 20px 0 0 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.ap-form-radio-block{
+    display: flex;    
+    display: column;
+}
+
+.ap-form-radio-block{
+	display: flex;    
+    	flex-direction: column;
+	margin: 20px 0 0 20px;
+    	font-family: Arial, Helvetica, sans-serif;
+    	font-size: 14px;
+}
+
+.ap-form-radio-block__wrap{
+	display: flex;    
+    flex-direction: column;
+}
+
+.ap-form-radio-block__option {
+	border: solid grey 1px;
+	margin-top: 1px;
+	max-width: 300px;
+}

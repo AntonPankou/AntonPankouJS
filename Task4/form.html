@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Form</title>
+        <link href="form-styles.css" rel='stylesheet'>
+    <head>        
+    <body>
+        <form>
+            <div class='ap-form-wrapper' >
+            
+                <div class='ap-form-head-block'>
+                    <div class='ap-form-head-block__title'>Form Action</div>
+                    <div class='ap-form-head-block__adress'>_mc4wp_action</div>                
+                </div>
+
+                <div class='ap-form-statement'>This field will alow your visitors to chose wether they 
+                        would like suscribe or unsubscribe</div>
+
+                <div class='ap-form-field-block'>
+                    <label>Field label</label>
+                    <input type='text' placeholder='Form Action' class='ap-form-field' oninput='fieldText()'></input>
+                </div>
+
+                <div class='ap-form-select-block'>
+                    <label>Choice type</label>
+                    <select>
+                        <option class='ap-first-option' value='First option' value='First option'>First option</option>
+                        <option class='ap-second-option' value='Second option' value='second option'>Radio button</option>
+                        <option class='ap-third-option' value='Third option' value='third option'>Third option</option>
+                    </select>
+                </div>
+
+                
+                <div class='ap-form-radio-block'>
+                    <div>Choices</div>
+			<div class='ap-form-radio-block__wrap'>
+				<div class='ap-form-radio-block__option ap-form-radio-block__option1'><input type='radio'name='subcription' value= 'Subscribe' checked>Subscribe</input></div>                    
+                    		<div class='ap-form-radio-block__option ap-form-radio-block__option2'><input type='radio'name='subcription' value= 'Unsubcribe'>Unsubcribe</input></div>
+			</div>
+                </div>
+
+                <div class='ap-form-field-block'>
+                    <input class='ap-checkbox' type='checkbox' value='accepted' checked>Wrap in paragraph types?</input>
+                </div>
+                <div>
+                    <button onclick='saving()' class='ap-form-button ap-form-button__addbutton'>Add to form</button>
+                </div>
+
+            </div>
+        </form>
+		<script type="text/javascript">
+			'use strict'
+
+			function fieldText() {
+			let inputField = document.getElementsByClassName('ap-form-field');
+			localStorage.addEventListener("input", myScript);
+			}
+
+			function saving() {
+			let checkBox = document.getElementsByClassName('ap-checkbox');			
+			let listPoint = document.getElementsByClassName('ap-first-option');
+			let radioChoise = document.getElementsByClassName('ap-form-radio-block__option2');
+
+			localStorage.setItem('checkbox', checkBox.value);
+			localStorage.setItem('field', inputField.value);
+			localStorage.setItem('list', listPoint.value);
+			localStorage.setItem('radio', radioChoise.value);
+			}
+			
+		</script>
+			
+    <body>
+</html>
