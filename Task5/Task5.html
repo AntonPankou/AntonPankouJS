@@ -2,7 +2,7 @@
 	<html>
 		<head>
 
-		<Title>Frames</Title>
+		<Title>Calendar</Title>
 		<meta content="text/html; charset=utf-8">
 
 		<style>
@@ -57,13 +57,15 @@
 
 			let now;
 			let monthFisrtDay;
+			let daysInMonth;
 
-			function setNow (year, mouth, date){
-			now = new Date(year, mouth, date);
-			monthFisrtDay = new Date(year, mouth);
+			function setNow (year, month, date){
+			now = new Date(year, month, date);
+			monthFisrtDay = new Date(year, month);
+			daysInMonth = (new Date (year, month + 1, -1)).getDate()+1;
 			}
 
-			setNow (2017, 2, 11);			
+			setNow (2012, 5, 12);
 			
 			// creation of global container
 
@@ -71,19 +73,19 @@
 			document.body.appendChild(globalContainer);
 			globalContainer.className = 'ap-globalContainer';
 
-			// constucting header secion with current date
+			// constucting header section with current date
 
 			let head = document.createElement('div');
 			globalContainer.appendChild(head);
 			head.className = 'ap-head';
 
-			let months = ['January','February','March','April', 'May','June','Jule','August','September','October','November','December'];	
+			const MONTHS = ['January','February','March','April', 'May','June','July','August','September','October','November','December'];	
 
-			for (let i = 0; i < months.length; i++) {
+			for (let i = 0; i < MONTHS.length; i++) {
 
 			if (now.getMonth() == i) {
 			
-			let currentDatetext = months[i] + ' ' +now.getFullYear();
+			let currentDatetext = MONTHS[i] + ' ' +now.getFullYear();
 			let headText = document.createTextNode(currentDatetext);
 			head.appendChild(headText);
 			}
@@ -95,12 +97,12 @@
 			daysSection.className = 'ap-daysSection';
 			globalContainer.appendChild(daysSection);			
 
-			let week = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+			const WEEK = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 			
-			for (let i = 0; i < week.length; i++ ){
+			for (let i = 0; i < WEEK.length; i++ ){
 			let weekDay = document.createElement('div');
 			daysSection.appendChild(weekDay);
-			let dayName = document.createTextNode(week[i]);
+			let dayName = document.createTextNode(WEEK[i]);
 			weekDay.appendChild(dayName);
 			weekDay.className = 'ap-dayNameCell'
 			}
@@ -109,19 +111,7 @@
 				
 			let daysGrid = document.createElement('div');
 			daysGrid.className = 'ap-daysGrid';
-			globalContainer.appendChild(daysGrid);
-
-			//calculating days in month
-
-			let daysInMonth;			
-
-			if ( now.getMonth() == 0 || now.getMonth() == 2 || now.getMonth() == 4 || now.getMonth() == 7 || now.getMonth() == 8 || now.getMonth() == 9 ||  now.getMonth() == 11) {
-			daysInMonth = 31;
-			} else if (now.getMonth() == 3 || now.getMonth() == 5 || now.getMonth() == 6 || now.getMonth() == 10) {
-			daysInMonth = 30;
-			} else if (now.getMonth() == 1) {
-			daysInMonth = 29;
-			}			
+			globalContainer.appendChild(daysGrid);						
 
 			// empty cells on calendar
 
@@ -141,7 +131,11 @@
 
 			if (j == now.getDate()) {
 			dayDiv.style.background = 'yellow';
-			}			
+			}
+
+			if ( (j + monthFisrtDay.getDay()) % 7 == 0 ){
+			dayDiv.style.color = 'red';
+			}						
 			
 			let number = document.createTextNode(j);
 			dayDiv.appendChild(number);
