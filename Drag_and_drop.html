@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Drag and drop</title>
+    </head>
+    <body>
+        <div class='dragblock'>You spin me right round </div>
+
+        <script>
+            'use strict'
+
+            let dragBlock = document.querySelector('.dragblock');
+            dragBlock.style.padding = '10px';
+            dragBlock.style.background = 'green';
+            dragBlock.style.width = '150px';
+
+            dragBlock.onmousedown = function(e){
+                dragBlock.style.position = 'absolute';
+                moveAt(e);
+                document.body.appendChild(dragBlock);
+
+                function moveAt(e){
+                    dragBlock.style.left = e.pageX - dragBlock.offsetWidth / 2 + 'px';
+                    dragBlock.style.top = e.pageY - dragBlock.offsetHeight / 2 + 'px';
+                }
+
+                document.onmousemove = function(e) {
+                    moveAt(e);
+                }
+
+                dragBlock.onmouseup = function(){
+                    document.onmousemove = null;
+                    dragBlock.onmouseup = null;
+                }
+
+            }
+
+
+
+            
+                    
+        </script>
+    </body>
+</html>
