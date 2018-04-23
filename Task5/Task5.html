@@ -13,13 +13,11 @@
 			text-align: right;
 			font-family: arial;
 			}
-
 			.ap-daysSection {
 			display: flex;
 			flex-wrap: wrap;
 			border: solid transparent 1px;
 			}
-
 			.ap-dayNameCell {
 			width: 30px;
 			margin: 1px;
@@ -27,25 +25,40 @@
 			text-align: center;
 			font-family: arial;
 			}
-
 			.ap-globalContainer {
 			max-width: 240px;
 			border: solid black 1px;
 			}
-
 			.ap-daysGrid {
 			display: flex;
 			flex-wrap: wrap;			
 			}
-
 			.ap-head {
 			background: lightgrey;
 			text-align: center;
 			margin: 2px;
 			border: solid grey 1px;
 			border-radius: 3px;
-			font-family: arial;
-			}
+            font-family: arial;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            }
+            
+            .ap-button-left{
+                border-radius: 10px;
+                font-size: 8px;
+                box-shadow: none;
+                border: solid black 1px;
+            }
+
+            .ap-button-rigth{
+                border-radius: 10px;
+                font-size: 8px;
+                box-shadow: none;
+                border: solid black 1px;
+            }
 			
 		</style>
 		</head>
@@ -54,49 +67,70 @@
 			'use strict'
 			
 			// creation of date
-
 			let now;
 			let monthFisrtDay;
-			let daysInMonth;
+            let daysInMonth;
 
-			function setNow (year, month, date){
+            let year = 2013;
+            let month = 6;
+            let date = 25;
+
+            let setNow = function (year, month, date){
 			now = new Date(year, month, date);
 			monthFisrtDay = new Date(year, month);
 			daysInMonth = (new Date (year, month + 1, -1)).getDate()+1;
-			}
+            }
 
-			setNow (2012, 5, 12);
-			
+            setNow (year, month, date);
+
 			// creation of global container
-
 			let globalContainer = document.createElement('div');
 			document.body.appendChild(globalContainer);
-			globalContainer.className = 'ap-globalContainer';
-
+            globalContainer.className = 'ap-globalContainer';
+            
 			// constucting header section with current date
-
 			let head = document.createElement('div');
 			globalContainer.appendChild(head);
-			head.className = 'ap-head';
+            head.className = 'ap-head';
 
 			const MONTHS = ['January','February','March','April', 'May','June','July','August','September','October','November','December'];	
-
-			for (let i = 0; i < MONTHS.length; i++) {
-
-			if (now.getMonth() == i) {
-			
+            
+            for (let i = 0; i < MONTHS.length; i++) {
+			if (now.getMonth() == i) {			
 			let currentDatetext = MONTHS[i] + ' ' +now.getFullYear();
 			let headText = document.createTextNode(currentDatetext);
 			head.appendChild(headText);
 			}
-			}
+            }                       
+            // setting of buttons and buttons events
+            let buttonLeft = document.createElement('button');
+            head.insertBefore(buttonLeft, head.firstChild);
+            buttonLeft.className = 'ap-button-left';
+            let buttonLeftChar = document.createTextNode('<');
+            buttonLeft.appendChild(buttonLeftChar);
+            
+            let buttonRight = document.createElement('button');
+            head.appendChild(buttonRight);
+            buttonRight.className = 'ap-button-rigth';            
+            let buttonRigthChar = document.createTextNode('>');
+            buttonRight.appendChild(buttonRigthChar);
+
+            buttonLeft.addEventListener('click', switchMonthLeft);
+
+            function switchMonthLeft(){               
+                setNow (year, month-1, date);
+            }
+
+            buttonRight.addEventListener('click', switchMonthRight);
+
+            function switchMonthRight(){               
+                setNow (year, month+1, date);
+            }           
 			
 			// constucting week days section
-
 			let daysSection = document.createElement('div');
 			daysSection.className = 'ap-daysSection';
 			globalContainer.appendChild(daysSection);			
-
 			const WEEK = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 			
 			for (let i = 0; i < WEEK.length; i++ ){
@@ -112,37 +146,31 @@
 			let daysGrid = document.createElement('div');
 			daysGrid.className = 'ap-daysGrid';
 			globalContainer.appendChild(daysGrid);						
-
 			// empty cells on calendar
-
 			for (let i = 0; i < monthFisrtDay.getDay(); i++){
 			let emptyCell = document.createElement('div');
 			daysGrid.appendChild(emptyCell);
 			emptyCell.style.width = '30px';
 			emptyCell.style.margin = '2px';
 			}
-
 			// creating of days grid
-
 			for (let j = 1; j <= daysInMonth; j++) {
 			
 			let dayDiv = document.createElement('div');
 			daysGrid.appendChild(dayDiv);
-
 			if (j == now.getDate()) {
 			dayDiv.style.background = 'yellow';
 			}
-
 			if ( (j + monthFisrtDay.getDay()) % 7 == 0 ){
 			dayDiv.style.color = 'red';
 			}						
 			
 			let number = document.createTextNode(j);
 			dayDiv.appendChild(number);
-
 			dayDiv.className = 'ap-dayCell';
-			}			
-						
+            }
+
+            
 			</script>
 		
 		
