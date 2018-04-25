@@ -64,22 +64,17 @@
 		<body>			
 			<script type="text/javascript">
 			'use strict'
-
-
 			function DatePicker(year, month, date){
-
 			this.year = year;
 			this.month = month;
 			this.date = date;			
 			let now ;
 			let monthFisrtDay;
             		let daysInMonth;
-
             		
 			now = new Date(year, month, date);
 			monthFisrtDay = new Date(year, month);
 			daysInMonth = (new Date (year, month + 1, -1)).getDate()+1;
-
             		
 			// creation of global container
 			let globalContainer = document.createElement('div');
@@ -98,8 +93,8 @@
 			let headText = document.createTextNode(currentDatetext);
 			head.appendChild(headText);
 			}
-            		}
-		            // setting of buttons and buttons events
+      }
+		  // setting of buttons and buttons events
 		        let buttonLeft = document.createElement('button');
 		        head.insertBefore(buttonLeft, head.firstChild);
 		        buttonLeft.className = 'ap-button-left';
@@ -112,19 +107,9 @@
 		        let buttonRigthChar = document.createTextNode('>');
 		        buttonRight.appendChild(buttonRigthChar);
 		            
-			buttonLeft.addEventListener('click', switchMonthLeft);
-		        function switchMonthLeft(){               
-		        this.month--;
-		        }
-
-            		buttonRight.addEventListener('click', switchMonthRight);
-
-            		function switchMonthRight(){               
-                	this.month++;
-            		}           
+			           
 			
 			// constucting week days section
-
 			let daysSection = document.createElement('div');
 			daysSection.className = 'ap-daysSection';
 			globalContainer.appendChild(daysSection);			
@@ -145,7 +130,6 @@
 			globalContainer.appendChild(daysGrid);
 						
 			// empty cells on calendar
-
 			for (let i = 0; i < monthFisrtDay.getDay(); i++){
 			let emptyCell = document.createElement('div');
 			daysGrid.appendChild(emptyCell);
@@ -167,13 +151,33 @@
 			let number = document.createTextNode(j);
 			dayDiv.appendChild(number);
 			dayDiv.className = 'ap-dayCell';
-			}			
-          			
-            		
+			}            		
 			}
 			
-			let datePicker2 = new DatePicker(2000, 2, 13);
-			
+			let datePicker = new DatePicker(2018, 3, 25);     
+
+      
+      document.querySelector('.ap-button-left').onclick = addEventListener('click', prevMonth);
+
+      function prevMonth(){
+        remove();
+        datePicker = new DatePicker(datePicker.year, datePicker.month - 1, datePicker.date);
+      };
+
+
+      let buttonRight = document.querySelector('.ap-button-rigth');
+      buttonRight.addEventListener('click', nextMonth);
+
+      function nextMonth(){
+        remove();        
+      datePicker = new DatePicker(datePicker.year, datePicker.month + 1, datePicker.date);
+      };
+
+      function remove() {
+      let el = document.querySelector('.ap-globalContainer');
+      document.body.removeChild(el);
+      };
+      
 
 			</script>
 		</body>		
