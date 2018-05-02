@@ -4,62 +4,7 @@
 
 		<Title>Calendar</Title>
 		<meta content="text/html; charset=utf-8">
-
-		<style>
-			.ap-dayCell {
-			width: 30px;
-			border: solid black 1px;
-			margin: 1px;
-			text-align: right;
-			font-family: arial;
-			}
-			.ap-daysSection {
-			display: flex;
-			flex-wrap: wrap;
-			border: solid transparent 1px;
-			}
-			.ap-dayNameCell {
-			width: 30px;
-			margin: 1px;
-			border: solid transparent 1px;
-			text-align: center;
-			font-family: arial;
-			}
-			.ap-globalContainer {
-			max-width: 240px;
-			border: solid black 1px;
-			}
-			.ap-daysGrid {
-			display: flex;
-			flex-wrap: wrap;			
-			}
-			.ap-head {
-			background: lightgrey;
-			text-align: center;
-			margin: 2px;
-			border: solid grey 1px;
-			border-radius: 3px;
-	            font-family: arial;
-	            display: flex;
-	            flex-direction: row;
-	            align-items: center;
-	            justify-content: space-between;
-            }
-            
-            .ap-button-left{
-                border-radius: 10px;
-                font-size: 8px;
-                box-shadow: none;
-                border: solid black 1px;
-            }
-            .ap-button-rigth{
-                border-radius: 10px;
-                font-size: 8px;
-                box-shadow: none;
-                border: solid black 1px;
-            }
-			
-		</style>
+		<link rel="stylesheet" href="style.css">
 		</head>
 		<body>			
 			<script type="text/javascript">
@@ -74,50 +19,50 @@
             		
 			now = new Date(year, month, date);
 			monthFisrtDay = new Date(year, month);
-			daysInMonth = (new Date (year, month + 1, -1)).getDate()+1;
+			daysInMonth = (new Date (year, month + 1, -1)).getDate()+1;			
             		
 			// creation of global container
-			let globalContainer = document.createElement('div');
-			document.body.appendChild(globalContainer);
-            		globalContainer.className = 'ap-globalContainer';
+			this.globalContainer = document.createElement('div');
+			document.body.appendChild(this.globalContainer);
+            		this.globalContainer.className = 'ap-globalContainer';
             
 			// constucting header section with current date
-			let head = document.createElement('div');
-			globalContainer.appendChild(head);
-            		head.className = 'ap-head';
+			this.head = document.createElement('div');
+			this.globalContainer.appendChild(this.head);
+            		this.head.className = 'ap-head';
 			const MONTHS = ['January','February','March','April', 'May','June','July','August','September','October','November','December'];	
             
             		for (let i = 0; i < MONTHS.length; i++) {
 			if (now.getMonth() == i) {			
 			let currentDatetext = MONTHS[i] + ' ' +now.getFullYear();
 			let headText = document.createTextNode(currentDatetext);
-			head.appendChild(headText);
+			this.head.appendChild(headText);
 			}
       }
-		  // setting of buttons and buttons events
-		        let buttonLeft = document.createElement('button');
-		        head.insertBefore(buttonLeft, head.firstChild);
-		        buttonLeft.className = 'ap-button-left';
+		  	// setting of buttons
+		        this.buttonLeft = document.createElement('button');
+		        this.head.insertBefore(this.buttonLeft, this.head.firstChild);
+		        this.buttonLeft.className = 'ap-button-left';
 		        let buttonLeftChar = document.createTextNode('<');
-		        buttonLeft.appendChild(buttonLeftChar);
+		        this.buttonLeft.appendChild(buttonLeftChar);
 		            
-		        let buttonRight = document.createElement('button');
-		        head.appendChild(buttonRight);
-		        buttonRight.className = 'ap-button-rigth';            
-		        let buttonRigthChar = document.createTextNode('>');
-		        buttonRight.appendChild(buttonRigthChar);
+		        this.buttonRight = document.createElement('button');
+		        this.head.appendChild(this.buttonRight);
+		        this.buttonRight.className = 'ap-button-right';            
+		        let buttonRightChar = document.createTextNode('>');
+		        this.buttonRight.appendChild(buttonRightChar);
 		            
 			           
 			
 			// constucting week days section
-			let daysSection = document.createElement('div');
-			daysSection.className = 'ap-daysSection';
-			globalContainer.appendChild(daysSection);			
+			this.daysSection = document.createElement('div');
+			this.daysSection.className = 'ap-daysSection';
+			this.globalContainer.appendChild(this.daysSection);			
 			const WEEK = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 			
 			for (let i = 0; i < WEEK.length; i++ ){
 			let weekDay = document.createElement('div');
-			daysSection.appendChild(weekDay);
+			this.daysSection.appendChild(weekDay);
 			let dayName = document.createTextNode(WEEK[i]);
 			weekDay.appendChild(dayName);
 			weekDay.className = 'ap-dayNameCell'
@@ -125,14 +70,14 @@
 			
 			//constructing calendar days grid
 				
-			let daysGrid = document.createElement('div');
-			daysGrid.className = 'ap-daysGrid';
-			globalContainer.appendChild(daysGrid);
+			this.daysGrid = document.createElement('div');
+			this.daysGrid.className = 'ap-daysGrid';
+			this.globalContainer.appendChild(this.daysGrid);
 						
 			// empty cells on calendar
 			for (let i = 0; i < monthFisrtDay.getDay(); i++){
 			let emptyCell = document.createElement('div');
-			daysGrid.appendChild(emptyCell);
+			this.daysGrid.appendChild(emptyCell);
 			emptyCell.style.width = '30px';
 			emptyCell.style.margin = '2px';
 			}
@@ -140,7 +85,7 @@
 			for (let j = 1; j <= daysInMonth; j++) {
 			
 			let dayDiv = document.createElement('div');
-			daysGrid.appendChild(dayDiv);
+			this.daysGrid.appendChild(dayDiv);
 			if (j == now.getDate()) {
 			dayDiv.style.background = 'yellow';
 			}
@@ -151,34 +96,48 @@
 			let number = document.createTextNode(j);
 			dayDiv.appendChild(number);
 			dayDiv.className = 'ap-dayCell';
-			}            		
+			} 			           		
 			}
 			
 			let datePicker = new DatePicker(2018, 3, 25);     
+      
+		        //document.querySelector('.ap-button-left').onclick = addEventListener('click', prevMonth);
+
+			//document.querySelector('.ap-button-left').onclick = function () {
+			
+		        //datePicker = new DatePicker(datePicker.year, datePicker.month - 1, datePicker.date);
+			//remove();
+		      	//};		        	
+
+		      //document.querySelector('.ap-button-right').onclick = function () {
+			
+		        //datePicker = new DatePicker(datePicker.year, datePicker.month + 1, datePicker.date);
+			//remove();
+		      	//};
+			      
+		      function remove() {
+			if(document.body.children[1]) {
+		      	document.body.removeChild(document.body.children[1]);
+			}
+		      };
+
+			
+			document.querySelector('.ap-button-left').addEventListener("click", prevMonth);
+			document.querySelector('.ap-button-right').addEventListener("click", nextMonth);
+			
+			function prevMonth () {
+			datePicker = new DatePicker(datePicker.year, datePicker.month - 1, datePicker.date);
+			remove();
+			}
+
+			function nextMonth () {
+			datePicker = new DatePicker(datePicker.year, datePicker.month + 1, datePicker.date);
+			remove();
+			}
 
       
-      document.querySelector('.ap-button-left').onclick = addEventListener('click', prevMonth);
-
-      function prevMonth(){
-        remove();
-        datePicker = new DatePicker(datePicker.year, datePicker.month - 1, datePicker.date);
-      };
-
-
-      let buttonRight = document.querySelector('.ap-button-rigth');
-      buttonRight.addEventListener('click', nextMonth);
-
-      function nextMonth(){
-        remove();        
-      datePicker = new DatePicker(datePicker.year, datePicker.month + 1, datePicker.date);
-      };
-
-      function remove() {
-      let el = document.querySelector('.ap-globalContainer');
-      document.body.removeChild(el);
-      };
-      
-
 			</script>
 		</body>		
 	</html>
+	
+	
