@@ -43,7 +43,7 @@ function DatePicker(year,month,date) {
     for (let i = 1; i <= daysInMonth; i++) {			
         let dayDiv = document.createElement('div');
         this.daysGrid.appendChild(dayDiv);
-    if (i == now.getDate()) {
+    if (i == now.getDate() && now.getMonth() == new Date().getMonth()) {
         dayDiv.style.background = 'yellow';
     }
     if ( (i + monthFisrtDay.getDay()) % 7 == 0 ){
@@ -53,4 +53,4 @@ function DatePicker(year,month,date) {
         dayDiv.appendChild(number);
         dayDiv.className = 'ap-dayCell';
     }
-    }  
+    } 
