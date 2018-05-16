@@ -11,13 +11,14 @@ class App extends React.Component{
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }  
 
   render() {
     return (
       <div>
         <h2>Deal with it!</h2>
-        <ListOfCases deals={this.state.deals} />
+        <ListOfCases deals={this.state.deals} onClick={this.handleClick}/>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor='new-todo'>            
           </label>
@@ -26,18 +27,22 @@ class App extends React.Component{
             onChange={this.handleChange}
             value={this.state.content}
             />
-            <button>Add #{this.state.deals.length + 1}</button>
+            <button>New deal</button>
         </form>        
       </div>
     )
   }  
+  
+  handleClick () {
+    this.setState({deals:[]})
+  }
 
   handleChange(e){
     this.setState({content: e.target.value})
   }
 
   handleSubmit(e){
-    e.preventDefault();
+    e.preventDefault();  
 
     if (!this.state.content.length){
       return;
@@ -56,15 +61,26 @@ class App extends React.Component{
 }
 
 class ListOfCases extends React.Component{
+  let onclick = props.onClick
   render () {
     return (
-      <ul>
+      <ol>
         {this.props.deals.map(deal => (
-        <li key={deal.id}>{deal.content}</li>
+        <li key={deal.id}>{deal.content}   <DeleteButton onClick={onclick} /></li>
       ))}
-      </ul>
+      </ol>
     )
   }
+}
+
+class DeleteButton extends React.Component{   
+  constructor(props){
+    super(props);
+  }
+  let onclick = props.onClick
+  render(){
+  return <button onClick={this.onclick}>x</button>
+  }    
 }
 
 ReactDOM.render(
