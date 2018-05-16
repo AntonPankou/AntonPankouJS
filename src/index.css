@@ -1,0 +1,25 @@
+.title {
+  font: 30px "Century Gothic", Futura, sans-serif;
+  border: solid black 2px;
+  max-width: 300px;
+  text-align: center;
+}
+
+.input {
+  margin-top: 5px;
+  font-size: 30px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  border: solid black 1px;
+  width: 400px;
+  text-align: center;
+}
+
+.acceptbutton {
+  
+  border-radius: 50%;
+  margin-left: 10px;
+  font-size: 30px;
+  background: lightgrey;
+  outline: none;
+}
+
