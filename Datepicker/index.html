@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+	<html>
+		<head>
+
+		<Title>Calendar</Title>
+		<meta content="text/html; charset=utf-8">
+		<link rel="stylesheet" href="style.css">
+		</head>
+		<body>
+			<div id='root'></div>
+			<script src="model.js"></script>
+			<script src="view.js"></script>
+			<script src="datepicker.js"></script>
+			<script>
+				'use strict'
+
+				let mountNode = document.getElementById('root');				
+
+				let datePicker = new DatePicker(2018,4, mountNode);
+				datePicker.render;
+			
+			</script>
+			
+		</body>		
+	</html>
