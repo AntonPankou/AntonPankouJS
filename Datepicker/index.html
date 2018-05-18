@@ -7,19 +7,15 @@
 		<link rel="stylesheet" href="style.css">
 		</head>
 		<body>
-			<div id='root'></div>
-			<script src="model.js"></script>
-			<script src="view.js"></script>
-			<script src="datepicker.js"></script>
-			<script>
-				'use strict'
-
-				let mountNode = document.getElementById('root');				
-
-				let datePicker = new DatePicker(2018,4, mountNode);
-				datePicker.render;		
-			</script>
-			<script src="monthswitch.js"></script>
-			
+            <script src="dpData.js"></script>
+            <script src="model.js"></script>
+            <script src="view.js"></script>            
+            <script type="text/javascript">
+            'use strict'           
+            let datePicker = new DatePicker(2018, 4, 3);
+            
+            </script>
+            
+            <script src="controller.js"></script>
 		</body>		
 	</html>

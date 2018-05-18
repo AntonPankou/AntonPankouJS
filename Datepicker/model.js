@@ -1,27 +1,33 @@
-function Model(year, month){
-    this.date = new Date(year, month)
-    this.year = this.date.getFullYear();
-    this.month = this.date.getMonth();
-    this.today = new Date().getDay();
-    this.day = this.date.getDay();    
+'use strict'
 
-    this.monthsArray = ['January','February','March','April', 'May','June','July','August','September','October','November','December'];
-    this.daysArray = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
-
-    this.getFirstDayOfMonth = function(){
-        return this.date.getDay()
-    }
-
-    this.getDaysInMonth = function(){
-        return (new Date (this.year, this.month + 1, -1)).getDate()+1;
-    }
+function Model(){    
     
-    this.getPrevMonth = function(){
-        return this.month - 1;
-    }
+    // creation of global container
+    this.globalContainer = document.createElement('div');
+    document.body.appendChild(this.globalContainer);
+    this.globalContainer.className = 'ap-globalContainer';
+    
+    // constucting header 
+    this.head = document.createElement('div');
+    this.globalContainer.appendChild(this.head);
+    this.head.className = 'ap-head';
 
-    this.getNextMonth = function(){
-        return this.month + 1
-    }
+    // setting of left button
+    this.buttonLeft = document.createElement('button');
+    this.head.appendChild(this.buttonLeft);
+    this.buttonLeft.className = 'ap-button-left';
+    let buttonLeftChar = document.createTextNode('<');
+    this.buttonLeft.appendChild(buttonLeftChar);
+   
+    // setting of right button			
+    this.buttonRight = document.createElement('button');
+    this.head.appendChild(this.buttonRight);
+    this.buttonRight.className = 'ap-button-right';            
+    let buttonRightChar = document.createTextNode('>');
+    this.buttonRight.appendChild(buttonRightChar);
 
+    //constructing calendar days grid				
+    this.daysGrid = document.createElement('div');
+    this.daysGrid.className = 'ap-daysGrid';
+    this.globalContainer.appendChild(this.daysGrid);
 }

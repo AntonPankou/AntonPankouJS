@@ -1,103 +1,56 @@
-'use strict'
+function DatePicker(year,month,date) {
+    this.year = year;
+    this.month = month;
+    this.date = date;
 
-function View (model, mountNode){
+    let now = new Date(year, month, date);
+    let monthFisrtDay = new Date(year, month);
+    let daysInMonth = (new Date (year, month + 1, -1)).getDate()+1;
+    
+    Model.call(this);    
 
-    this.render = function(mountNode){
-        if (!mountNode) {
-            document.body.appendChild(renderBody())
+    // constucting header section with current date			
+    for (let i = 0; i < dpData.months.length; i++) {
+        if (now.getMonth() == i) {			
+        let currentDatetext = dpData.months[i] + ' ' +now.getFullYear();
+        let headText = document.createTextNode(currentDatetext);
+        this.head.insertBefore(headText, this.head.children[1]);
         }
-        mountNode.appendChild(renderBody());
+    }
+                
+    // empty cells on calendar
+    for (let i = 0; i < monthFisrtDay.getDay(); i++){
+        let emptyCell = document.createElement('div');			
+        this.daysGrid.appendChild(emptyCell);
+        emptyCell.style.width = '30px';
+        emptyCell.style.margin = '2px';
     }
 
-    function renderBody(){
-        let globalContainer = document.createElement('div');        
-        globalContainer.className = 'ap-globalContainer';
-        globalContainer.appendChild(renderHead(model));
-        globalContainer.appendChild(renderDaysSection(model));
-        globalContainer.appendChild(renderDaysGrid(model));
-        
-        return globalContainer
+    // constucting week days section
+    this.daysSection = document.createElement('div');
+    this.daysSection.className = 'ap-daysSection';
+    this.globalContainer.insertBefore(this.daysSection, this.globalContainer.children[1]);			
+    
+    for (let i = 0; i < dpData.week.length; i++ ){
+        let weekDay = document.createElement('div');
+        this.daysSection.appendChild(weekDay);
+        let dayName = document.createTextNode(dpData.week[i]);
+        weekDay.appendChild(dayName);
+        weekDay.className = 'ap-dayNameCell'
     }
 
-	function remove(){
-	document.querySelector('.ap-globalContainer').remove();
-}
-    
-    function renderHead(model) {
-        let head = document.createElement('div');    
-        head.className = 'ap-head';           
-    
-        let buttonLeft = document.createElement('button');
-        
-        buttonLeft.className = 'ap-button-left';
-        let buttonLeftChar = document.createTextNode('<');
-        buttonLeft.appendChild(buttonLeftChar);        
-
-	head.appendChild(buttonLeft);
-
-        for (let i = 0; i < model.monthsArray.length; i++) {
-            if (model.month == i) {			
-            let currentDatetext = model.monthsArray[i] + ' ' + model.year;
-            let headText = document.createTextNode(currentDatetext);
-            head.insertBefore(headText, head.children[1]);
-            }
-        } 
-    
-        let buttonRight = document.createElement('button');
-        head.appendChild(buttonRight);
-        buttonRight.className = 'ap-button-right';            
-        let buttonRightChar = document.createTextNode('>');
-        buttonRight.appendChild(buttonRightChar);        
-
-        return head
+    // creating of days grid
+    for (let i = 1; i <= daysInMonth; i++) {			
+        let dayDiv = document.createElement('div');
+        this.daysGrid.appendChild(dayDiv);
+    if (i == now.getDate() && now.getMonth() == new Date().getMonth()) {
+        dayDiv.style.background = 'yellow';
     }
-
-    function renderDaysSection(model){
-        let daysSection = document.createElement('div');
-        daysSection.className = 'ap-daysSection';    			
-    
-        for (let i = 0; i < model.daysArray.length; i++ ){
-            let weekDay = document.createElement('div');
-            daysSection.appendChild(weekDay);
-            let dayName = document.createTextNode(model.daysArray[i]);
-            weekDay.appendChild(dayName);
-            weekDay.className = 'ap-dayNameCell'
-        }
-
-        return daysSection
-    }
-    
-
-    function renderDaysGrid(model) {
-        let daysGrid = document.createElement('div');
-        daysGrid.className = 'ap-daysGrid';    
-
-        
-        for (let i = 0; i < model.getFirstDayOfMonth(); i++){
-            let emptyCell = document.createElement('div');			
-            daysGrid.appendChild(emptyCell);
-            emptyCell.style.width = '30px';
-            emptyCell.style.margin = '2px';
-        }
-
-        
-        for (let i = 1; i <= model.getDaysInMonth(); i++) {			
-            let dayDiv = document.createElement('div');
-            daysGrid.appendChild(dayDiv);
-            if (i == new Date().getDate() && model.month == new Date().getMonth() && model.year == new Date().getFullYear()) {
-            dayDiv.style.background = 'yellow';
-        }
-
-        if ( (i + model.getFirstDayOfMonth()) % 7 == 0 ){
-            dayDiv.style.color = 'red';
-        }			
-
-        let number = document.createTextNode(i);
+    if ( (i + monthFisrtDay.getDay()) % 7 == 0 ){
+        dayDiv.style.color = 'red';
+    }			
+    let number = document.createTextNode(i);
         dayDiv.appendChild(number);
         dayDiv.className = 'ap-dayCell';
-        }
-
-        return daysGrid
     }
-    
-}
+    } 
