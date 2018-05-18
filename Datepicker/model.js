@@ -16,4 +16,12 @@ function Model(year, month){
         return (new Date (this.year, this.month + 1, -1)).getDate()+1;
     }
     
+    this.getPrevMonth = function(){
+        return this.month - 1;
+    }
+
+    this.getNextMonth = function(){
+        return this.month + 1
+    }
+
 }

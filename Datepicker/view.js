@@ -17,17 +17,23 @@ function View (model, mountNode){
         globalContainer.appendChild(renderDaysGrid(model));
         
         return globalContainer
-    }    
+    }
+
+	function remove(){
+	document.querySelector('.ap-globalContainer').remove();
+}
     
     function renderHead(model) {
         let head = document.createElement('div');    
         head.className = 'ap-head';           
     
         let buttonLeft = document.createElement('button');
-        head.appendChild(buttonLeft);
+        
         buttonLeft.className = 'ap-button-left';
         let buttonLeftChar = document.createTextNode('<');
-        buttonLeft.appendChild(buttonLeftChar);   
+        buttonLeft.appendChild(buttonLeftChar);        
+
+	head.appendChild(buttonLeft);
 
         for (let i = 0; i < model.monthsArray.length; i++) {
             if (model.month == i) {			
@@ -41,7 +47,7 @@ function View (model, mountNode){
         head.appendChild(buttonRight);
         buttonRight.className = 'ap-button-right';            
         let buttonRightChar = document.createTextNode('>');
-        buttonRight.appendChild(buttonRightChar);
+        buttonRight.appendChild(buttonRightChar);        
 
         return head
     }
