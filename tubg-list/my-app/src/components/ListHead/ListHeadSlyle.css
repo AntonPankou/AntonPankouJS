@@ -1,0 +1,34 @@
+.ap-list-head--wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    font-family: 'Sunflower', sans-serif;
+    font-weight: bold;
+}
+
+.ap-list--player-place{
+    width: 40px;
+}
+
+.ap-list--player-name{
+    width: 180px;
+    border: solid black 1px;    
+}
+
+.ap-list--player-status{
+    width: 60px;
+    border: solid black 1px;
+    text-align: center
+}
+
+.ap-list--player-kills{
+    width: 40px;
+    text-align: center;
+    border: solid black 1px;
+}
+
+.ap-list--player-deaths{
+    width: 50px;
+    text-align: center;
+    border: solid black 1px;
+}
