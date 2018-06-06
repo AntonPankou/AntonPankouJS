@@ -1,0 +1,10 @@
+.ap-movie-card{
+    margin: 10px;
+    height: 278px;
+    border: solid black 2px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.ap-movie-card--image:hover{
+    cursor: pointer;
+}

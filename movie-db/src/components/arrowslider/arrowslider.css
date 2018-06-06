@@ -1,0 +1,14 @@
+.ap-arrowslider--arrow{
+    display: flex;
+    align-items: center;
+    font-size: 100px;
+    width: 98%;
+    height: 750px;
+    color: grey;
+    border: solid lightgrey 2px;
+}
+
+.ap-arrowslider--arrow:hover{    
+    color: white;
+    border: solid white 2px;
+}

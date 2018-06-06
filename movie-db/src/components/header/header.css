@@ -1,0 +1,47 @@
+.ap-header--wrapper{
+    position: fixed;
+    width: 80%;
+    height: 10%;    
+    right: 0%;    
+    display: flex;
+    justify-content: space-between;    
+    color: blue;
+}
+
+.ap-search--block{
+    margin-left: 10%;
+    display: flex;
+    flex-direction: row;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 20px;
+    align-items: center;
+}
+
+.ap-search{
+    position: absolute;
+    top: 35%;
+}
+
+.ap-header--navigation{
+    margin-left: 65%
+}
+
+.ap-navigation--wrapper {
+    display: flex;    
+    margin-top: 8%;
+}
+
+.ap-navigation--page{
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 20px;    
+    margin-left: 20px;
+}
+
+.ap-navigation--page:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.ap-search-title{
+    margin-right: 1%;
+}
