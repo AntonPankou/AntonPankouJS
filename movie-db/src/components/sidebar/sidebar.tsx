@@ -1,12 +1,7 @@
 import * as React from 'react';
 import './sidebar.css';
 
-export class Sidebar extends React.Component{
-  public constructor(props: number){
-    super(props);
-    this.state={ hide: false}
-    // this.hideBar=this.hideBar.bind(this)
-  }  
+export class Sidebar extends React.Component {
   
   public render() {
       return (

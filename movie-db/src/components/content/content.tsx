@@ -13,7 +13,7 @@ interface IMovieCard {
 }
 
 const contentItems = moviesArray.map((item: IMovieCard, key: number)=>
-    <MovieCard imageLink={ posterPath + item.poster_path } key={item.id} />
+    <MovieCard backgroundLink={ posterPath + item.poster_path } key={item.id} />
 )
 
 export class Content extends React.Component{

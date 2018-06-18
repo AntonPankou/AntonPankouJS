@@ -1,7 +1,6 @@
 import * as React from 'react';
 import './App.css';
 
-import { ArrowSlider} from './components/arrowslider/arrowslider';
 import { Content } from './components/content/content';
 import { Header } from './components/header/header';
 import  { Sidebar }  from './components/sidebar/sidebar';
@@ -18,12 +17,9 @@ export default class App extends React.Component {
             <div className='ap-global-container--content-wrapper'>
               <div className='ap-global-container--header'>
                 <Header />
-              </div>              
+              </div>
               <div className='ap-global-container--content'>
                 <Content />
-              </div>
-              <div className='ap-global-container--arrowslider'>
-                <ArrowSlider />
               </div>
             </div>
         </div>        

@@ -12,10 +12,5 @@ body{
   position: absolute;
   top: 10%;
   left: 23%;
-}
-
-.ap-global-container--arrowslider{
-  position: absolute;
-  right: 3%;
-  top: 11%;
+  overflow: hidden;
 }
